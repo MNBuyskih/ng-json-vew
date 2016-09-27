@@ -16,7 +16,7 @@ module JSONView {
             return ast;
         }
 
-        highlight(ast: IJSONAst = this.ast, indent: number = 0): string {
+        highlight(ast: IJSONAst = this.ast, indent: number = this.options.initialIndent || 0): string {
             ast = this.beforeParse(ast, indent / 2);
 
             let types = ['object', 'property', 'array', 'key', 'string', 'number', 'true', 'false', 'null'];
@@ -92,5 +92,6 @@ module JSONView {
 
     export interface IOptions {
         beforeParse: (ast: IJSONAst, level: number, topLevelAst: IJSONAst) => IJSONAst;
+        initialIndent: number;
     }
 }

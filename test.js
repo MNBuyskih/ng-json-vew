@@ -98,6 +98,6 @@ angular
                     }
                 }
                 return ast;
-            }
+            },
         };
     });

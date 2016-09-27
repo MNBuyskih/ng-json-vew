@@ -19,7 +19,7 @@ var JSONView;
         };
         Highlight.prototype.highlight = function (ast, indent) {
             if (ast === void 0) { ast = this.ast; }
-            if (indent === void 0) { indent = 0; }
+            if (indent === void 0) { indent = this.options.initialIndent || 0; }
             ast = this.beforeParse(ast, indent / 2);
             var types = ['object', 'property', 'array', 'key', 'string', 'number', 'true', 'false', 'null'];
             if (types.indexOf(ast.type) > -1) {
