@@ -1,0 +1,17 @@
+{
+  "name": "jsonView",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^3.0.0",
+    "reload": "^1.0.1"
+  },
+  "scripts": {
+    "reload": "reload -b",
+    "ts": "tsc -p .",
+    "ts:w": "tsc -w -p .",
+    "stylus": "stylus -m -o dist src/theme.styl",
+    "stylus:w": "stylus -w -m -o dist src/theme.styl",
+    "dev": "concurrently \"npm run reload\" \"npm run ts:w\" \"npm run stylus:w\""
+  }
+}

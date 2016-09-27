@@ -1,0 +1,26 @@
+.json-view-object,
+.json-view-property,
+.json-view-array {
+  background: transparent;
+}
+.json-view-braces,
+.json-view-brackets {
+  color: inherit;
+}
+.json-view-key {
+  color: #660e7a;
+}
+.json-view-colon,
+.json-view-comma,
+.json-view-true,
+.json-view-false,
+.json-view-null {
+  color: #000080;
+}
+.json-view-number {
+  color: #00f;
+}
+.json-view-string {
+  color: #008000;
+}
+/*# sourceMappingURL=theme.css.map */

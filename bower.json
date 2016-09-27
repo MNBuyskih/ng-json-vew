@@ -1,0 +1,9 @@
+{
+  "name": "jsonView",
+  "private": true,
+  "dependencies": {
+    "json-to-ast": "vtrushin/json-to-ast",
+    "angular": "^1.5.8",
+    "angular-sanitize": "^1.5.8"
+  }
+}
