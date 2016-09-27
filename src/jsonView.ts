@@ -3,21 +3,21 @@ module JSONView {
         .filter('jsonView', () => {
             return (json: string, options: JSONView.IOptions): string => {
                 const ast = parse(json);
-                return new Highlight(options).highlight(ast);
+                return new Highlight(ast, options).highlight();
             };
         });
 
     class Highlight {
-        constructor(private options: IOptions) {
+        constructor(private ast: IJSONAst, private options: IOptions) {
         }
 
-        beforeParse(ast) {
-            if (this.options && this.options.beforeParse) ast = this.options.beforeParse(ast);
+        beforeParse(ast: IJSONAst, level: number) {
+            if (this.options && this.options.beforeParse) ast = this.options.beforeParse(ast, level, this.ast);
             return ast;
         }
 
-        highlight(ast: IJSONAst, indent: number = 0): string {
-            ast = this.beforeParse(ast);
+        highlight(ast: IJSONAst = this.ast, indent: number = 0): string {
+            ast = this.beforeParse(ast, indent / 2);
 
             let types = ['object', 'property', 'array', 'key', 'string', 'number', 'true', 'false', 'null'];
             if (types.indexOf(ast.type) > -1) {
@@ -91,6 +91,6 @@ module JSONView {
     }
 
     export interface IOptions {
-        beforeParse: (ast: IJSONAst) => IJSONAst;
+        beforeParse: (ast: IJSONAst, level: number, topLevelAst: IJSONAst) => IJSONAst;
     }
 }

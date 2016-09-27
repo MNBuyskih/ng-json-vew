@@ -4,21 +4,23 @@ var JSONView;
         .filter('jsonView', function () {
         return function (json, options) {
             var ast = parse(json);
-            return new Highlight(options).highlight(ast);
+            return new Highlight(ast, options).highlight();
         };
     });
     var Highlight = (function () {
-        function Highlight(options) {
+        function Highlight(ast, options) {
+            this.ast = ast;
             this.options = options;
         }
-        Highlight.prototype.beforeParse = function (ast) {
+        Highlight.prototype.beforeParse = function (ast, level) {
             if (this.options && this.options.beforeParse)
-                ast = this.options.beforeParse(ast);
+                ast = this.options.beforeParse(ast, level, this.ast);
             return ast;
         };
         Highlight.prototype.highlight = function (ast, indent) {
+            if (ast === void 0) { ast = this.ast; }
             if (indent === void 0) { indent = 0; }
-            ast = this.beforeParse(ast);
+            ast = this.beforeParse(ast, indent / 2);
             var types = ['object', 'property', 'array', 'key', 'string', 'number', 'true', 'false', 'null'];
             if (types.indexOf(ast.type) > -1) {
                 return this[("highlight_" + ast.type)](ast, indent);
